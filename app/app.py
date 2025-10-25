@@ -124,7 +124,7 @@ if uploaded_file is not None:
         xml_content = uploaded_file.read().decode('utf-8')
         df = parse_rekordbox_xml(xml_content)
 
-        st.success(f"✅ Successfully loaded {len(df)} tracks!")
+        st.success(f"✅ Successfully loaded {len(df):,} tracks!")
 
         # ====================================================================
         # Key Statistics
@@ -244,13 +244,13 @@ if uploaded_file is not None:
             # Count individual genres
             from collections import Counter
             genre_counter = Counter(expanded_genres)
-            genre_split_counts = pd.Series(dict(genre_counter)).sort_values(ascending=True).tail(15)
+            genre_split_counts = pd.Series(dict(genre_counter)).sort_values(ascending=True).tail(20)
 
             fig_genre_split = px.bar(
                 x=genre_split_counts.values,
                 y=genre_split_counts.index,
                 orientation='h',
-                title='Top 15 Genres (by track count, split)',
+                title='Top 20 Genres (by track count, split)',
                 labels={'x': 'Track Count', 'y': 'Genre'},
                 color=genre_split_counts.values,
                 color_continuous_scale='Plasma'
