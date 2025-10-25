@@ -135,7 +135,7 @@ if uploaded_file is not None:
         col1, col2, col3, col4 = st.columns(4)
 
         with col1:
-            st.metric("Total Tracks", len(df))
+            st.metric("Total Tracks", f"{len(df):,}")
 
         with col2:
             total_hours = df['total_time'].sum() / 3600
@@ -143,7 +143,7 @@ if uploaded_file is not None:
 
         with col3:
             unique_artists = df['artist'].nunique()
-            st.metric("Unique Artists", unique_artists)
+            st.metric("Unique Artists", f"{unique_artists:,}")
 
         with col4:
             # Count unique individual genres (split by comma)
@@ -152,7 +152,7 @@ if uploaded_file is not None:
                 individual_genres = [g.strip() for g in genres_str.split(',')]
                 all_genres.extend(individual_genres)
             unique_genres = len(set(all_genres))
-            st.metric("Unique Genres", unique_genres)
+            st.metric("Unique Genres", f"{unique_genres:,}")
 
         # ====================================================================
         # Top Tracks by Play Count
