@@ -2,6 +2,8 @@
 
 A Streamlit web application for visualizing and analyzing your Rekordbox DJ music collection.
 
+**Try it now**: [https://rekordbox-collection-analyzer.streamlit.app/](https://rekordbox-collection-analyzer.streamlit.app/)
+
 ## Features
 
 - **Upload & Parse**: Upload your Rekordbox XML collection export
@@ -66,6 +68,11 @@ Newline-delimited JSON format, one track per line. Great for streaming processin
 
 ## Files
 
-- `app.py`: Main Streamlit application
+- `app/app.py`: Main Streamlit application
 - `requirements.txt`: Python dependencies
+- `pyproject.toml`: Project configuration and uv dependencies
 - `README.md`: This file
+
+## Disclaimer
+
+This application was built with assistance from [Claude Code](https://claude.com/claude-code), Anthropic's AI coding assistant. The app is deployed via [Streamlit Community Cloud](https://streamlit.io/cloud) and is provided as-is for personal use to analyze your Rekordbox music collection.
