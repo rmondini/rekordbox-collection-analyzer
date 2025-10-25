@@ -2,7 +2,7 @@
 
 A Streamlit web application for visualizing and analyzing your Rekordbox DJ music collection.
 
-**Try it now**: [https://rekordbox-collection-analyzer.streamlit.app/](https://rekordbox-collection-analyzer.streamlit.app/)
+👉 **Try it now**: [https://rekordbox-collection-analyzer.streamlit.app/](https://rekordbox-collection-analyzer.streamlit.app/) 👈
 
 ## Features
 
@@ -33,7 +33,7 @@ Or using pip with the requirements.txt file:
 pip install -r requirements.txt
 ```
 
-## Running the App
+## Running the App locally
 
 ```bash
 uv run streamlit run app.py
@@ -66,12 +66,22 @@ All track data in tabular format, suitable for spreadsheet analysis.
 ### NDJSON Export
 Newline-delimited JSON format, one track per line. Great for streaming processing or database imports.
 
-## Files
+## Repository Structure
 
-- `app/app.py`: Main Streamlit application
-- `requirements.txt`: Python dependencies
-- `pyproject.toml`: Project configuration and uv dependencies
-- `README.md`: This file
+```
+rekordbox-collection-analyzer/
+├── app/
+│   └── app.py              # Main Streamlit application
+├── pyproject.toml          # Project configuration and uv dependencies
+├── requirements.txt        # Python dependencies (for pip)
+├── README.md               # Project documentation
+└── .gitignore              # Git ignore rules
+```
+
+**Key files:**
+- `app/app.py` - The main Streamlit web application with all analysis features
+- `pyproject.toml` - Project metadata and dependency specifications for uv
+- `requirements.txt` - Python package dependencies (alternative to uv)
 
 ## Disclaimer
 
