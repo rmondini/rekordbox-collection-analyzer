@@ -79,6 +79,7 @@ rekordbox-collection-analyzer/
 ├── app/
 │   └── app.py              # Main Streamlit application
 ├── pyproject.toml          # Project configuration and uv dependencies
+├── uv.lock                 # Locked dependency versions for reproducible builds
 ├── requirements.txt        # Python dependencies (for pip)
 ├── README.md               # Project documentation
 └── .gitignore              # Git ignore rules
