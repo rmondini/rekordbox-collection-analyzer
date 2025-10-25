@@ -35,8 +35,14 @@ pip install -r requirements.txt
 
 ## Running the App locally
 
+**With uv:**
 ```bash
-uv run streamlit run app.py
+uv run streamlit run app/app.py
+```
+
+**With pip:**
+```bash
+streamlit run app/app.py
 ```
 
 The app will start on `http://localhost:8501`.
