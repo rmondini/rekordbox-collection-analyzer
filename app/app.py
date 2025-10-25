@@ -216,11 +216,11 @@ if uploaded_file is not None:
         col_genre_pie, col_genre_bar = st.columns(2)
 
         with col_genre_pie:
-            genre_counts = df[df['genre'] != ''].groupby('genre').size().sort_values(ascending=False).head(15)
+            genre_counts = df[df['genre'] != ''].groupby('genre').size().sort_values(ascending=False).head(20)
             fig_genre_pie = px.pie(
                 values=genre_counts.values,
                 names=genre_counts.index,
-                title='Top 15 Genres (by track count)'
+                title='Top 20 Genres (by track count)'
             )
             st.plotly_chart(fig_genre_pie, config={})
 
