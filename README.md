@@ -23,7 +23,13 @@ A Streamlit web application for analyzing and visualizing your Rekordbox DJ musi
 Install dependencies using uv:
 
 ```bash
-uv add streamlit pandas plotly
+uv sync
+```
+
+Or using pip with the requirements.txt file:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Running the App
