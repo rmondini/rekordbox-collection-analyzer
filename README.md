@@ -45,7 +45,7 @@ uv run streamlit run app/app.py
 streamlit run app/app.py
 ```
 
-The app will start on `http://localhost:8501`.
+The app will start on `http://localhost:8501` (or another port if 8501 is already in use). Check the terminal output for the exact URL.
 
 ## Usage
 
