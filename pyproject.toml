@@ -1,0 +1,10 @@
+[project]
+name = "rekordbox-collection-analyzer"
+version = "0.1.0"
+description = "A Streamlit web application for analyzing and visualizing your Rekordbox DJ music collection"
+requires-python = ">=3.8"
+dependencies = [
+    "streamlit>=1.28.0",
+    "pandas>=2.0.0",
+    "plotly>=5.17.0",
+]
