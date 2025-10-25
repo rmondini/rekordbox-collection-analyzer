@@ -1,17 +1,16 @@
 # Rekordbox Collection Analyzer
 
-A Streamlit web application for analyzing and visualizing your Rekordbox DJ music collection.
+A Streamlit web application for visualizing and analyzing your Rekordbox DJ music collection.
 
 ## Features
 
 - **Upload & Parse**: Upload your Rekordbox XML collection export
-- **Collection Overview**: Total tracks, duration, unique artists, genres, and average rating
+- **Collection Overview**: Total tracks, duration, unique artists, genres, and more
 - **Top Tracks**: Bar chart and table of your most-played tracks
 - **BPM Distribution**: Histogram showing the spread of track BPMs
 - **Genre Breakdown**: Pie chart and bar chart of genre statistics
 - **Artist Analysis**: Most-played artists and artists with most tracks
-- **Rating Distribution**: Histogram of track ratings
-- **Data Export**: Download analysis results as CSV or NDJSON
+- **Data Export**: Download collection information as CSV or NDJSON.
 
 ## Requirements
 
@@ -38,7 +37,7 @@ pip install -r requirements.txt
 uv run streamlit run app.py
 ```
 
-The app will start on `http://localhost:8501`
+The app will start on `http://localhost:8501`.
 
 ## Usage
 
@@ -49,13 +48,13 @@ The app will start on `http://localhost:8501`
 
 ## Data Format
 
-The app expects a Rekordbox XML collection export. Each track contains:
+The app expects a Rekordbox XML collection export. You can obtain your collection export in Rekordbox under **File** → **Export Collection in xml format**. Each track contains:
 
 - **Basic Info**: Track name, artist, composer, album, genre
 - **Audio Properties**: File type, size, duration, bit rate, sample rate
 - **Musical Data**: BPM, key/tonality, year
 - **DJ Data**: Play count, rating, date added, file location
-- **Advanced**: Tempo changes, cue points with colors
+- **Advanced**: Tempo changes, cue points with colors.
 
 ## Output
 
@@ -68,4 +67,5 @@ Newline-delimited JSON format, one track per line. Great for streaming processin
 ## Files
 
 - `app.py`: Main Streamlit application
+- `requirements.txt`: Python dependencies
 - `README.md`: This file

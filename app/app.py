@@ -351,3 +351,17 @@ if uploaded_file is not None:
 
 else:
     st.info("👈 Upload a Rekordbox XML collection file to get started!")
+
+    st.markdown("""
+    ## How to Export Your Rekordbox Collection
+
+    To get your Rekordbox XML collection file:
+
+    1. Open **Rekordbox** on your computer
+    2. Go to **File** menu
+    3. Select **Export Collection in xml format**
+    4. Choose a location to save the file
+    5. Upload the exported XML file using the file uploader on the left
+
+    Once uploaded, you'll be able to explore your entire music collection with interactive visualizations!
+    """)
