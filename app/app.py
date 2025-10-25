@@ -146,7 +146,12 @@ if uploaded_file is not None:
             st.metric("Unique Artists", unique_artists)
 
         with col4:
-            unique_genres = df['genre'].nunique()
+            # Count unique individual genres (split by comma)
+            all_genres = []
+            for genres_str in df[df['genre'] != '']['genre']:
+                individual_genres = [g.strip() for g in genres_str.split(',')]
+                all_genres.extend(individual_genres)
+            unique_genres = len(set(all_genres))
             st.metric("Unique Genres", unique_genres)
 
         # ====================================================================
