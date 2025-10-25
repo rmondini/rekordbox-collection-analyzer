@@ -174,11 +174,11 @@ if uploaded_file is not None:
                 color_continuous_scale='Viridis'
             )
             fig_plays.update_layout(height=600, showlegend=False)
-            st.plotly_chart(fig_plays, use_container_width=True)
+            st.plotly_chart(fig_plays, config={})
 
         with col_table:
             st.subheader("Top Tracks")
-            st.dataframe(top_tracks, use_container_width=True, height=400)
+            st.dataframe(top_tracks, width='stretch', height=400)
 
         # ====================================================================
         # BPM Distribution
@@ -198,7 +198,7 @@ if uploaded_file is not None:
                 color_discrete_sequence=['#1f77b4']
             )
             fig_bpm.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig_bpm, use_container_width=True)
+            st.plotly_chart(fig_bpm, config={})
 
         with col_stats:
             bpm_data = df[df['average_bpm'] > 0]['average_bpm']
@@ -222,7 +222,7 @@ if uploaded_file is not None:
                 names=genre_counts.index,
                 title='Top 15 Genres (by track count)'
             )
-            st.plotly_chart(fig_genre_pie, use_container_width=True)
+            st.plotly_chart(fig_genre_pie, config={})
 
         with col_genre_bar:
             # Split genres by comma and count individual genres
@@ -247,7 +247,7 @@ if uploaded_file is not None:
                 color_continuous_scale='Plasma'
             )
             fig_genre_split.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig_genre_split, use_container_width=True)
+            st.plotly_chart(fig_genre_split, config={})
 
         # ====================================================================
         # Artist Breakdown
@@ -269,7 +269,7 @@ if uploaded_file is not None:
                 color_continuous_scale='Blues'
             )
             fig_artist_plays.update_layout(showlegend=False, height=500)
-            st.plotly_chart(fig_artist_plays, use_container_width=True)
+            st.plotly_chart(fig_artist_plays, config={})
 
         with col_artist_count:
             artist_counts = df[df['artist'] != ''].groupby('artist').size().sort_values(ascending=True).tail(20)
@@ -283,7 +283,7 @@ if uploaded_file is not None:
                 color_continuous_scale='Greens'
             )
             fig_artist_count.update_layout(showlegend=False, height=500)
-            st.plotly_chart(fig_artist_count, use_container_width=True)
+            st.plotly_chart(fig_artist_count, config={})
 
         # ====================================================================
         # Key Distribution
@@ -305,7 +305,7 @@ if uploaded_file is not None:
                 color_continuous_scale='Viridis'
             )
             fig_key.update_layout(showlegend=False, height=600)
-            st.plotly_chart(fig_key, use_container_width=True)
+            st.plotly_chart(fig_key, config={})
 
         # ====================================================================
         # Data Export
@@ -344,7 +344,7 @@ if uploaded_file is not None:
         display_df = df[['name', 'artist', 'genre', 'tonality', 'average_bpm', 'play_count', 'date_added']].copy()
         display_df.columns = ['Track', 'Artist', 'Genre', 'Key', 'BPM', 'Plays', 'Added']
 
-        st.dataframe(display_df, use_container_width=True, height=600)
+        st.dataframe(display_df, width='stretch', height=600)
 
     except Exception as e:
         st.error(f"❌ Error parsing file: {str(e)}")

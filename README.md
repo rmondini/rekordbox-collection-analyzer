@@ -45,7 +45,7 @@ uv run streamlit run app/app.py
 streamlit run app/app.py
 ```
 
-The app will start on `http://localhost:8501`.
+The app will start on `http://localhost:8501` (or another port if 8501 is already in use). Check the terminal output for the exact URL.
 
 ## Usage
 
@@ -79,15 +79,11 @@ rekordbox-collection-analyzer/
 ├── app/
 │   └── app.py              # Main Streamlit application
 ├── pyproject.toml          # Project configuration and uv dependencies
+├── uv.lock                 # Locked dependency versions for reproducible builds
 ├── requirements.txt        # Python dependencies (for pip)
 ├── README.md               # Project documentation
 └── .gitignore              # Git ignore rules
 ```
-
-**Key files:**
-- `app/app.py` - The main Streamlit web application with all analysis features
-- `pyproject.toml` - Project metadata and dependency specifications for uv
-- `requirements.txt` - Python package dependencies (alternative to uv)
 
 ## Disclaimer
 
