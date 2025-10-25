@@ -85,11 +85,6 @@ rekordbox-collection-analyzer/
 └── .gitignore              # Git ignore rules
 ```
 
-**Key files:**
-- `app/app.py` - The main Streamlit web application with all analysis features
-- `pyproject.toml` - Project metadata and dependency specifications for uv
-- `requirements.txt` - Python package dependencies (alternative to uv)
-
 ## Disclaimer
 
 This application was built with assistance from [Claude Code](https://claude.com/claude-code), Anthropic's AI coding assistant. The app is deployed via [Streamlit Community Cloud](https://streamlit.io/cloud) and is provided as-is for personal use to analyze your Rekordbox music collection.
