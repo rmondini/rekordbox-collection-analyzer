@@ -255,7 +255,7 @@ if uploaded_file is not None:
                 color=genre_split_counts.values,
                 color_continuous_scale='Plasma'
             )
-            fig_genre_split.update_layout(showlegend=False, height=400)
+            fig_genre_split.update_layout(showlegend=False, height=600)
             st.plotly_chart(fig_genre_split, config={})
 
         # ====================================================================
