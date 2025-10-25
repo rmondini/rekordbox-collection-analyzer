@@ -216,7 +216,11 @@ if uploaded_file is not None:
         col_genre_pie, col_genre_bar = st.columns(2)
 
         with col_genre_pie:
-            genre_counts = df[df['genre'] != ''].groupby('genre').size().sort_values(ascending=False).head(20)
+            # Normalize genres by sorting them alphabetically to handle "House, Acid" vs "Acid, House"
+            normalized_genres = df[df['genre'] != '']['genre'].apply(
+                lambda x: ', '.join(sorted([g.strip() for g in x.split(',')]))
+            )
+            genre_counts = normalized_genres.value_counts().head(20)
             fig_genre_pie = px.pie(
                 values=genre_counts.values,
                 names=genre_counts.index,
