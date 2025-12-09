@@ -16,7 +16,7 @@ A Streamlit web application for visualizing and analyzing your Rekordbox DJ musi
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.10+
 - Dependencies: streamlit, pandas, plotly
 
 ## Installation

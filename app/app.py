@@ -150,7 +150,8 @@ if uploaded_file is not None:
             all_genres = []
             for genres_str in df[df['genre'] != '']['genre']:
                 individual_genres = [g.strip() for g in genres_str.split(',')]
-                all_genres.extend(individual_genres)
+                # Only include genres that have at least one alphanumeric character
+                all_genres.extend([g for g in individual_genres if any(c.isalnum() for c in g)])
             unique_genres = len(set(all_genres))
             st.metric("Unique Genres", f"{unique_genres:,}")
 
@@ -217,14 +218,18 @@ if uploaded_file is not None:
         # ====================================================================
 
         st.header("🎸 Genre Breakdown")
+        st.markdown("<p style='font-size: 15px; color: gray;'>Note: Tracks with missing genre metadata are excluded from these visualizations.</p>", unsafe_allow_html=True)
 
         col_genre_pie, col_genre_bar = st.columns(2)
 
         with col_genre_pie:
             # Normalize genres by sorting them alphabetically to handle "House, Acid" vs "Acid, House"
+            # Also filter out genres that only contain punctuation or whitespace
             normalized_genres = df[df['genre'] != '']['genre'].apply(
-                lambda x: ', '.join(sorted([g.strip() for g in x.split(',')]))
+                lambda x: ', '.join(sorted([g.strip() for g in x.split(',') if any(c.isalnum() for c in g)]))
             )
+            # Only keep genres that have at least one alphanumeric character after normalization
+            normalized_genres = normalized_genres[normalized_genres.str.len() > 0]
             genre_counts = normalized_genres.value_counts().head(20)
             fig_genre_pie = px.pie(
                 values=genre_counts.values,
@@ -239,7 +244,8 @@ if uploaded_file is not None:
             for genres_str in df[df['genre'] != '']['genre']:
                 # Split by comma and strip whitespace
                 individual_genres = [g.strip() for g in genres_str.split(',')]
-                expanded_genres.extend(individual_genres)
+                # Only include genres that have at least one alphanumeric character
+                expanded_genres.extend([g for g in individual_genres if any(c.isalnum() for c in g)])
 
             # Count individual genres
             from collections import Counter
@@ -263,11 +269,15 @@ if uploaded_file is not None:
         # ====================================================================
 
         st.header("👨‍🎤 Top Artists")
+        st.markdown("<p style='font-size: 15px; color: gray;'>Note: Tracks attributed to \"Various Artists\" (VA, V/A) or with missing artist metadata are excluded from these visualizations.</p>", unsafe_allow_html=True)
 
         col_artist_plays, col_artist_count = st.columns(2)
 
         with col_artist_plays:
-            artist_plays = df[df['artist'] != ''].groupby('artist')['play_count'].sum().sort_values(ascending=True).tail(20)
+            # Exclude various artists placeholders (case insensitive)
+            excluded_artists = {'various artists', 'va', 'v/a'}
+            df_filtered = df[~df['artist'].str.lower().isin(excluded_artists) & (df['artist'] != '')]
+            artist_plays = df_filtered.groupby('artist')['play_count'].sum().sort_values(ascending=True).tail(20)
             fig_artist_plays = px.bar(
                 x=artist_plays.values,
                 y=artist_plays.index,
@@ -281,7 +291,10 @@ if uploaded_file is not None:
             st.plotly_chart(fig_artist_plays, config={})
 
         with col_artist_count:
-            artist_counts = df[df['artist'] != ''].groupby('artist').size().sort_values(ascending=True).tail(20)
+            # Exclude various artists placeholders (case insensitive)
+            excluded_artists = {'various artists', 'va', 'v/a'}
+            df_filtered = df[~df['artist'].str.lower().isin(excluded_artists) & (df['artist'] != '')]
+            artist_counts = df_filtered.groupby('artist').size().sort_values(ascending=True).tail(20)
             fig_artist_count = px.bar(
                 x=artist_counts.values,
                 y=artist_counts.index,
@@ -317,10 +330,23 @@ if uploaded_file is not None:
             st.plotly_chart(fig_key, config={})
 
         # ====================================================================
+        # Detailed Data Table
+        # ====================================================================
+
+        st.header("📋 Detailed Track Data")
+        st.markdown("<p style='font-size: 15px; color: gray;'>💡 <b>Interactive table</b>: Click on column headers to sort data. Click the three dots (⋮) on a column header to hide/show columns.</p>", unsafe_allow_html=True)
+
+        # Create display dataframe with selected columns
+        display_df = df[['name', 'artist', 'genre', 'tonality', 'average_bpm', 'play_count', 'date_added']].copy()
+        display_df.columns = ['Track', 'Artist', 'Genre', 'Key', 'BPM', 'Plays', 'Added']
+
+        st.dataframe(display_df, width='stretch', height=600)
+
+        # ====================================================================
         # Data Export
         # ====================================================================
 
-        st.header("📥 Export Data")
+        st.header("📥 Download Data")
 
         col_csv, col_json = st.columns(2)
 
@@ -332,6 +358,7 @@ if uploaded_file is not None:
                 file_name="collection_analysis.csv",
                 mime="text/csv"
             )
+            st.caption("Perfect for Excel, Google Sheets, or spreadsheet analysis")
 
         with col_json:
             # Create NDJSON format
@@ -342,18 +369,7 @@ if uploaded_file is not None:
                 file_name="collection_analysis.ndjson",
                 mime="application/x-ndjson"
             )
-
-        # ====================================================================
-        # Detailed Data Table
-        # ====================================================================
-
-        st.header("📋 Detailed Track Data")
-
-        # Create display dataframe with selected columns
-        display_df = df[['name', 'artist', 'genre', 'tonality', 'average_bpm', 'play_count', 'date_added']].copy()
-        display_df.columns = ['Track', 'Artist', 'Genre', 'Key', 'BPM', 'Plays', 'Added']
-
-        st.dataframe(display_df, width='stretch', height=600)
+            st.caption("Ideal for advanced/technical data analyses and database imports")
 
     except Exception as e:
         st.error(f"❌ Error parsing file: {str(e)}")
